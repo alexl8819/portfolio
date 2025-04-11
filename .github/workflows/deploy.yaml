@@ -1,4 +1,4 @@
-name: S3 Deploy
+name: Deploy to AWS S3
 on: push
 jobs:
   run:
@@ -14,7 +14,7 @@ jobs:
         run: npm run build
       - name: Deploy
         id: deploy
-        uses: uskayyyyy/gha-s3-deploy@v2
+        uses: nick-y-ito/gha-s3-deploy@v2.0.6
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           bucket: ${{ secrets.AWS_BUCKET }}
