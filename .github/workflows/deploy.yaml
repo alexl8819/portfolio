@@ -12,13 +12,14 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Deploy
-        id: deploy
-        uses: nick-y-ito/gha-s3-deploy@v2.0.6
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-          bucket: ${{ secrets.AWS_BUCKET }}
-          region: us-east-1   # Optional - Default: us-east-1
-          folder: ./dist      # Optional - Default: . (root)
-      - name: Output Website URL
-        run: echo ${{ steps.deploy.outputs.website-url }}
+          aws-region: us-east-1
+      - name: Upload changes to S3 and issue Cloudfront invalidations
+        uses: vladcosorg/action-s3-cloudfront-smart-deploy@v1
+        with:
+          source: ./dist
+          target: ${{ secrets.AWS_BUCKET }}
+          distribution: ${{ secrets.AWS_DISTRIBUTION_ID }}
