@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+@theme {
+    --default-font-family: 'Inter Variable', sans-serif;
+    --font-playfair-display: 'Playfair Display Variable', serif;
+    --font-source-sans: 'Source Sans 3 Variable', sans-serif;
+    --color-primary-light: oklch(0.9612 0 0);
+}
