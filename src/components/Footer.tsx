@@ -1,7 +1,12 @@
-export default function Footer () {
+import { memo } from 'react';
+import { version } from '../../package.json';
+
+const Footer = () => {
     return (
-        <footer>
-            <p className="text-center text-xs">© {new Date().getFullYear()} - <a href="https://github.com/alexl8819">alexl8819</a></p>
+        <footer className='py-4'>
+            <p className="text-center text-xs">© Copyright {new Date().getFullYear()} — <a href="https://github.com/alexl8819">alexl8819</a> v{version}</p>
         </footer>
-    )
+    );
 }
+
+export default memo(Footer);
