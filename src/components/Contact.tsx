@@ -203,7 +203,7 @@ const Contact: FC<ContactProps> = ({ sitekey, endpoint, anchor }) => {
             	</div>
           	</div>
 			<ToastContainer 
-				position='top-center'
+				position='bottom-right'
 				autoClose={3000}
 				hideProgressBar
 				newestOnTop={false}
