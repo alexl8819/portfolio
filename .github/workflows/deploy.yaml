@@ -33,3 +33,4 @@ jobs:
           source: ./dist
           target: ${{ secrets.AWS_BUCKET }}
           distribution: ${{ secrets.AWS_DISTRIBUTION_ID }}
+          invalidation-strategy: 'PRECISE'
