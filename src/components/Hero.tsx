@@ -31,7 +31,7 @@ const Hero: FC<HeroProps> = ({ name = 'John Doe', introduction }) => {
             </div>
             {
                 showWork ? (
-                    <Button className="flex flex-col items-center justify-center mt-24 md:mt-8" onClick={() => scrollTo('#projects')}>
+                    <Button className="flex flex-col items-center justify-center mt-24 md:mt-8" onPress={() => scrollTo('#projects')}>
                         <div className="mt-8 animate-bounce" aria-label="Scroll to projects">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-down h-6 w-6 text-neutral-400"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
                         </div>

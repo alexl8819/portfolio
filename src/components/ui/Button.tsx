@@ -1,15 +1,19 @@
-import { type FC, type PropsWithChildren, type MouseEventHandler } from 'react';
+import { type FC, type PropsWithChildren } from 'react';
+import { Button as AriaButton, Link, type PressEvent } from 'react-aria-components';
 
 export enum VariantType {
     Outline = 'outline',
     Ghost = 'ghost'
 }
 
+type ButtonType = 'submit' | 'button';
+
 interface ButtonProps {
+    type?: ButtonType
     className?: string,
     variant?: VariantType
     disabled?: boolean
-    onClick?: MouseEventHandler<HTMLElement>
+    onPress?: (e: PressEvent) => void
     label?: string | undefined
 }
 
@@ -20,7 +24,7 @@ interface LinkButtonProps extends ButtonProps {
 
 const noop = () => {};
 
-const Button: FC<PropsWithChildren<ButtonProps>> = ({ children, variant, className = '', disabled, onClick = noop, label = undefined }) => {
+const Button: FC<PropsWithChildren<ButtonProps>> = ({ children, variant, className = '', disabled, type = 'button', onPress = noop, label = undefined }) => {
     className += className.concat(` cursor-${disabled ? 'not-allowed' : 'pointer'} ${disabled ? 'opacity-30' : ''} `);
 
     if (variant === VariantType.Outline) {
@@ -29,10 +33,10 @@ const Button: FC<PropsWithChildren<ButtonProps>> = ({ children, variant, classNa
         className = className.concat('p-6 rounded-lg border border-zinc-100 shadow-sm hover:shadow-md transition-shadow');
     }
     
-    return (<button className={className} disabled={disabled} onClick={onClick} aria-label={label}>{ children }</button>);
+    return (<AriaButton type={type} className={className} isDisabled={disabled} onPress={onPress} aria-label={label}>{ children }</AriaButton>);
 }
 
-const LinkButton: FC<PropsWithChildren<LinkButtonProps>> = ({ children, href, variant, className = '', target = '_self', onClick = noop}) => {
+const LinkButton: FC<PropsWithChildren<LinkButtonProps>> = ({ children, href, variant, className = '', target = '_self', onPress = noop}) => {
     className += className.concat(' ');
 
     if (variant === VariantType.Outline) {
@@ -41,7 +45,7 @@ const LinkButton: FC<PropsWithChildren<LinkButtonProps>> = ({ children, href, va
         className = className.concat('p-6 rounded-lg border border-zinc-100 shadow-sm hover:shadow-md transition-shadow');
     }
 
-    return (<a href={href} className={className} onClick={onClick} target={target}>{ children }</a>);
+    return (<Link href={href} className={className} onPress={onPress} target={target}>{ children }</Link>);
 }
 
 export {
