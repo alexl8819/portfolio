@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef, memo, type FC } from 'react';
+import { Form, Input, Label, TextArea, TextField } from 'react-aria-components';
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import { Github } from 'lucide-react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
@@ -141,13 +142,13 @@ const Contact: FC<ContactProps> = ({ sitekey, endpoint, anchor }) => {
             	</div>
             	<div className="bg-zinc-50 p-6 rounded-lg border border-zinc-100">
               		<h3 className="text-lg font-semibold mb-4">Write a Message</h3>
-              		<form className="space-y-4" onSubmit={onSubmit}>
+              		<Form className="space-y-4" onSubmit={onSubmit}>
                 		<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  			<div className="space-y-2">
-                    			<label htmlFor="name" className="text-sm font-medium text-zinc-700">
+                  			<TextField className="space-y-2">
+                    			<Label htmlFor="name" className="text-sm font-medium text-zinc-700">
                       				Name
-                    			</label>
-                    			<input
+                    			</Label>
+                    			<Input
                       				id="name"
                       				className="w-full px-3 py-2 border border-zinc-300 rounded-md"
                       				placeholder="Your name"
@@ -155,12 +156,12 @@ const Contact: FC<ContactProps> = ({ sitekey, endpoint, anchor }) => {
 									{...register('name', { required: true })} 
                     			/>
 								{ errors.name && <p role="alert" className='mx-2 text-red-500'>{ (errors.name.message as string) || 'Name is required.' }</p> }
-                  			</div>
-                  			<div className="space-y-2">
-                    			<label htmlFor="email" className="text-sm font-medium text-zinc-700">
+                  			</TextField>
+                  			<TextField className="space-y-2">
+                    			<Label htmlFor="email" className="text-sm font-medium text-zinc-700">
                       				Email
-                    			</label>
-                    			<input
+                    			</Label>
+                    			<Input
                       				id="email"
                       				className="w-full px-3 py-2 border border-zinc-300 rounded-md"
                       				type="email"
@@ -169,37 +170,38 @@ const Contact: FC<ContactProps> = ({ sitekey, endpoint, anchor }) => {
 									{...register('email', { required: true })} 
                     			/>
 								{ errors.email && <p role="alert" className='mx-2 text-red-500'>{ (errors.email.message as string) || 'Email is required.' }</p> }
-                  			</div>
+                  			</TextField>
                 		</div>
-                		<div className="space-y-2">
-                  			<label htmlFor="message" className="text-sm font-medium text-zinc-700">
+                		<TextField className="space-y-2">
+                  			<Label htmlFor="message" className="text-sm font-medium text-zinc-700">
                     			Message
-                  			</label>
-                  			<textarea
+                  			</Label>
+                  			<TextArea
                     			id="message"
                     			className="w-full px-3 py-2 border border-zinc-300 rounded-md resize-none"
                     			rows={4}
                     			placeholder="Your message"
 								aria-invalid={errors.name ? "true" : "false"}
 								{...register('message', { required: true, minLength: 25 })}
-                  			></textarea>
+                  			></TextArea>
 							{ errors.message && <p role="alert" className='mx-2 text-red-500'>{ (errors.message.message as string) || 'Message is required (minimum 25 characters.' }</p> }
-                		</div>
+                		</TextField>
 						<div className="flex flex-col justify-center items-center space-y-2 min-h-8">
 							{ 
 								requestCaptcha ? 
-									<>
-										<input 
+									<TextField>
+										<Label htmlFor='hidden' className='sr-only'>Captcha</Label>
+										<Input
 											type="hidden" 
 											{...register('captchaToken', { required: true })} 
 										/>
 										<HCaptcha sitekey={sitekey} onVerify={handleToken} ref={captchaRef} />
 										{ errors.captchaToken && <p role="alert" className='mx-2 text-red-500'>{ (errors.captchaToken.message as string) || 'Captcha must be solved first.' }</p> }
-									</> : null 
+									</TextField> : null 
 							}
 						</div>
-                		<Button className="py-3 w-full border border-zinc-400/40 rounded-lg">Send Message</Button>
-              		</form>
+                		<Button type='submit' className="py-3 w-full border border-zinc-400/40 rounded-lg">Send Message</Button>
+              		</Form>
             	</div>
           	</div>
 			<ToastContainer 
