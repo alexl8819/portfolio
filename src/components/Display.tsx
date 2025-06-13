@@ -111,7 +111,7 @@ const ScreenshotDisplay: FC<ScreenshotDisplayProps> = ({ owner, repo }) => {
                 desktopScreenshot ? <source srcSet={desktopScreenshot} media='(min-width: 1280px)' /> : null
             }
             {
-                mobileScreenshot ? <source srcSet={mobileScreenshot} media='(max-width: 767px)' /> : null
+                mobileScreenshot ? <source srcSet={mobileScreenshot} media='(max-width: 1279px)' /> : null
             }
             <img
                 src={`https://placehold.co/225x200?text=${repo}`}
