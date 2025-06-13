@@ -132,7 +132,7 @@ const Projects: FC<ProjectProps> = ({ owner, repositories, anchor }) => {
             					return (
               						<Button
                 						key={id}
-                						onClick={() => {
+                						onPress={() => {
                   							instanceRef.current?.moveToIdx(id)
                 						}}
                 						className={`border-none w-3 h-3 p-1 rounded-full cursor-pointer ${curSlide === id ? 'bg-black' : 'bg-zinc-300'}`}
@@ -152,7 +152,7 @@ const Projects: FC<ProjectProps> = ({ owner, repositories, anchor }) => {
             			}
     				</div>
 					{loaded && instanceRef.current && (
-						<div className={`${!showHover ? 'hidden' : 'group-hover:flex' } justify-center items-end absolute bottom-0 left-20 sm:left-30 text-center pointer-events-none bg-transparent z-20`}>
+						<div className={`${!showHover ? 'hidden' : 'group-hover:flex' } justify-center items-end absolute bottom-0 left-25 sm:left-30 text-center pointer-events-none bg-transparent z-20`}>
 							<span className='text-sm/relaxed opacity-70 underline underline-offset-4'>Swipe to see next card ⟶</span>
 						</div>
         			)}
