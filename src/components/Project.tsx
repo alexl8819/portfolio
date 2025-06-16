@@ -21,6 +21,7 @@ interface ProjectProps {
 }
 const Project: FC<ProjectProps> = ({ repo, owner, shouldDim, isInitial }) => {
     const [canUseCaseStudy, setCanUseCaseStudy] = useState<boolean | null>(null);
+    const [ready, setReady] = useState<boolean>(false);
     const repos = useStore(repositories);
 
     const caseStudyUrl = `${MAIN_GH_URL.replace('OWNER', owner).replace('REPO', repo)}/main/CASE_STUDY.md`;
@@ -35,10 +36,23 @@ const Project: FC<ProjectProps> = ({ repo, owner, shouldDim, isInitial }) => {
         fetchActiveUrl();
     }, []);
 
-    const curProject = Object.keys(repos).length ? repos[repo] : null;
+    useEffect(() => {
+        const curProject = repos[repo];
 
-    if (!curProject || !curProject.data || canUseCaseStudy === null) {
+        if (curProject && curProject.data) {
+            setReady(true);
+        }
+    }, [repos])
+
+    if (!ready) {
         return (<ProjectCardSkeleton />);
+    }
+
+    // TODO: replace and use a cleaner way
+    const curProject = repos[repo];
+
+    if (!curProject || !curProject.data) {
+        return null;
     }
 
     let Icon;

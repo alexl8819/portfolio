@@ -1,4 +1,4 @@
-import { persistentAtom } from '@nanostores/persistent';
+import { persistentMap } from '@nanostores/persistent';
 import dayjs from 'dayjs';
 import { GH_REPO_API, HOURS_STALE_CONTENT, type GH_REPO_RESPONSE_SCHEMA } from '../constants';
 
@@ -15,7 +15,7 @@ interface Repositories {
     [index: string]: MetadataResponse
 }
 
-export const repositories = persistentAtom<Repositories>('projects', {}, {
+export const repositories = persistentMap<Repositories>('projects', {}, {
     encode: JSON.stringify,
     decode: JSON.parse,
 });
@@ -58,8 +58,8 @@ export async function fetchAndRevalidate (repo: string, owner: string) {
     const data = await res.json();
     const etag = res.headers.get('ETag');
     const lastModified = res.headers.get('Last-Modified');
-    
-    repos[repo] = { 
+
+    repositories.setKey(repo, { 
         data: {
             name: data.name,
             language: data.language,
@@ -69,7 +69,5 @@ export async function fetchAndRevalidate (repo: string, owner: string) {
         },
         etag, 
         lastModified 
-    };
-
-    repositories.set(repos);
+    });
 }
