@@ -32,5 +32,6 @@ jobs:
         with:
           source: ./dist
           target: ${{ secrets.AWS_BUCKET }}
+          s3args: --exact-timestamps --no-progress --delete
           distribution: ${{ secrets.AWS_DISTRIBUTION_ID }}
           invalidation-strategy: 'precise'
