@@ -10,7 +10,7 @@ import {
     repositories,
     fetchAndRevalidate 
 } from '../stores/repo';
-import { getCommonIcon, isURLActive } from '../util';
+import { getCommonIcon } from '../util';
 import { MAIN_GH_URL } from '../constants';
 
 interface ProjectProps { 
@@ -20,20 +20,11 @@ interface ProjectProps {
     isInitial?: boolean
 }
 const Project: FC<ProjectProps> = ({ repo, owner, shouldDim, isInitial }) => {
-    const [canUseCaseStudy, setCanUseCaseStudy] = useState<boolean | null>(null);
     const [ready, setReady] = useState<boolean>(false);
     const repos = useStore(repositories);
 
-    const caseStudyUrl = `${MAIN_GH_URL.replace('OWNER', owner).replace('REPO', repo)}/blob/main/CASE_STUDY.md`;
-
     useEffect(() => {
-        const fetchActiveUrl = async () => {
-            const result = await isURLActive(caseStudyUrl);
-            setCanUseCaseStudy(result);
-        };
-
         fetchAndRevalidate(repo, owner);
-        fetchActiveUrl();
     }, []);
 
     useEffect(() => {
@@ -98,19 +89,10 @@ const Project: FC<ProjectProps> = ({ repo, owner, shouldDim, isInitial }) => {
                                     <FolderGit className="mr-2 h-4 w-4" />
                                     View Code
                                 </LinkButton>
-                                {
-                                    canUseCaseStudy ? (
-                                        <LinkButton href={caseStudyUrl} target='_blank' variant={VariantType.Outline} className="text-xs flex items-center">
-                                            <FolderGit className="mr-2 h-4 w-4" />
-                                            Case Study
-                                        </LinkButton>
-                                    ) : (
-                                        <Button variant={VariantType.Outline} className="text-xs flex items-center" disabled={true}>
-                                            <FolderGit className="mr-2 h-4 w-4" />
-                                            Case Study
-                                        </Button>
-                                    )
-                                }
+                                <LinkButton href={`${MAIN_GH_URL.replace('OWNER', owner).replace('REPO', repo)}/blob/main/CASE_STUDY.md`} target='_blank' variant={VariantType.Outline} className="text-xs flex items-center">
+                                    <FolderGit className="mr-2 h-4 w-4" />
+                                    Case Study
+                                </LinkButton>
                                 {
                                     curProject && curProject.data?.homepage && curProject.data?.homepage.length ? 
                                         (

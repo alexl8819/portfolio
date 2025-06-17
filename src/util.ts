@@ -39,19 +39,6 @@ import {
 
 import { type SkillLike } from './constants';
 
-export const isURLActive = async (url: string) => {
-    let response;
-
-    try {
-        response = await fetch(url, { signal: AbortSignal.timeout(5000) });
-    } catch (err) {
-        console.error(err);
-        return false;
-    }
-
-    return response.ok;
-}
-
 export const scrollTo = (selector: string, container?: HTMLElement) => {
     const element: Element | null = (container || document).querySelector(selector);
 
