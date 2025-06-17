@@ -24,7 +24,7 @@ const Project: FC<ProjectProps> = ({ repo, owner, shouldDim, isInitial }) => {
     const [ready, setReady] = useState<boolean>(false);
     const repos = useStore(repositories);
 
-    const caseStudyUrl = `${MAIN_GH_URL.replace('OWNER', owner).replace('REPO', repo)}/main/CASE_STUDY.md`;
+    const caseStudyUrl = `${MAIN_GH_URL.replace('OWNER', owner).replace('REPO', repo)}/blob/main/CASE_STUDY.md`;
 
     useEffect(() => {
         const fetchActiveUrl = async () => {
