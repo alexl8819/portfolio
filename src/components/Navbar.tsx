@@ -7,7 +7,7 @@ import {
   Send
 } from 'lucide-react';
 
-import { VariantType, Button } from './ui/Button';
+import { Button } from './ui/Button';
 import { updatePosition } from '../stores/page';
 import { scrollTo } from '../util';
 
@@ -52,7 +52,7 @@ const Navbar: FC<NavbarProps> = ({ shouldOpen, toggle }) => {
             		</Button>
 				</li>
 				<li>
-					<Button className={`flex flex-row xl:flex-col items-start xl:items-center font-dm-sans text-sm md:text-base justify-center bg-black text-white font-bold`} variant={VariantType.Outline} onPress={scroll('#contact')}>
+					<Button className={`flex flex-row xl:flex-col items-start xl:items-center font-dm-sans text-sm md:text-base justify-center rounded-full h-32 w-32 bg-black text-white font-bold`} onPress={scroll('#contact')}>
             			<Send className='stroke-[1.5] inline-block mr-3 xl:mr-0 xl:mb-1.5' /> Contact Me
           			</Button>
 				</li>
