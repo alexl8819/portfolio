@@ -15,6 +15,7 @@ jobs:
           ABOUT_ME: ${{ vars.ABOUT_ME }}
           AUTHOR: ${{ vars.AUTHOR }}
           DESCRIPTION: ${{ vars.DESCRIPTION }}
+          LINKS: ${{ vars.LINKS }}
           EARNED_CERTS: ${{ vars.EARNED_CERTS }}
           ENDPOINT: ${{ vars.ENDPOINT }}
           NAME: ${{ vars.NAME }}
