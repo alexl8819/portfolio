@@ -15,6 +15,7 @@ interface PortfolioProps {
     name: string
     author: string
     description: string
+    links: string
     repos: string
     skills: string
     certs: string
@@ -25,7 +26,8 @@ interface PortfolioProps {
     }
 }
 
-const Portfolio: FC<PortfolioProps> = ({ name, author, description, repos, skills, certs, aboutMe, contact }) => {
+const Portfolio: FC<PortfolioProps> = ({ name, author, description, links, repos, skills, certs, aboutMe, contact }) => {
+    const externalLinks = JSON.parse(links);
     const repositories = JSON.parse(repos);
     const certifications= JSON.parse(certs);
     const aboutBlocks = JSON.parse(aboutMe);
@@ -34,7 +36,7 @@ const Portfolio: FC<PortfolioProps> = ({ name, author, description, repos, skill
         <main>
             <Hero name={name.split(' ')[0]} introduction={description} />
             <div className='relative flex flex-row w-full'>
-                <Profile name={name} description={description} />
+                <Profile name={name} description={description} links={externalLinks} />
                 <ObservableContainer>
                     {
                         repositories && repositories.length && author && author.length ? <Projects anchor='projects' owner={author} repositories={repositories} /> : null 
@@ -56,7 +58,7 @@ const Portfolio: FC<PortfolioProps> = ({ name, author, description, repos, skill
                     {
                         aboutBlocks && aboutBlocks.length ? <About anchor='about' blocks={aboutBlocks} /> : null
                     }
-                    <Contact anchor='contact' sitekey={contact.sitekey} endpoint={contact.endpoint} />
+                    <Contact anchor='contact' sitekey={contact.sitekey} endpoint={contact.endpoint} links={externalLinks} />
 		        </ObservableContainer>
             </div>
         </main>

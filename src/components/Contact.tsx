@@ -13,12 +13,18 @@ import { updatePosition } from '../stores/page';
 
 import 'react-toastify/ReactToastify.css';
 
+// const NON_EMPTY_MESSAGE_STR = /^(?!\s*$)[A-Za-z0-9 ]+$/;
+
 interface ContactProps extends BaseProps {
 	sitekey: string
 	endpoint: string
+	links: {
+		github: string
+		bluesky: string
+	}
 }
 
-const Contact: FC<ContactProps> = ({ sitekey, endpoint, anchor }) => {
+const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
 	const [requestCaptcha, setRequestCaptcha] = useState<boolean>(false);
 	const [submitted, setSubmitted] = useState<boolean>(false);
 	const captchaRef = useRef<HCaptcha>(null);
@@ -41,7 +47,7 @@ const Contact: FC<ContactProps> = ({ sitekey, endpoint, anchor }) => {
 		setSubmitted(true);
 	}, 1000, { immediate: true }));
 
-	const handleToken = (token: string) => setValue('captchaToken', token, { shouldValidate: true });
+	const handleToken = (token: string) => setValue('captchaToken', token, { shouldValidate: false });
 
 	useEffect(() => {
 		console.log('contact loaded');
@@ -62,9 +68,9 @@ const Contact: FC<ContactProps> = ({ sitekey, endpoint, anchor }) => {
 				response = await fetch(endpoint, {
 					method: 'POST',
 					body: JSON.stringify({
-						name,
+						name: name.trim(),
 						email,
-						message,
+						message: message.trim(),
 						captchaToken 
 					})
 				});
@@ -131,11 +137,11 @@ const Contact: FC<ContactProps> = ({ sitekey, endpoint, anchor }) => {
               		I'm currently available for freelance work and <span className="font-bold">full-time</span> positions.
             	</p>
             	<div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-					<LinkButton href="https://bsky.app/profile/alexl8819.bsky.social" target="_blank" variant={VariantType.Outline} className="flex justify-center items-center">
+					<LinkButton href={links.bluesky} target="_blank" variant={VariantType.Outline} className="flex justify-center items-center">
 						<img src={Bluesky.src} className='mr-2 w-4 h-4' alt='bluesky logo' />
                 		BlueSky
               		</LinkButton>
-					<LinkButton href="https://github.com/alexl8819" target='_blank' variant={VariantType.Outline} className="flex justify-center items-center">
+					<LinkButton href={links.github} target='_blank' variant={VariantType.Outline} className="flex justify-center items-center">
                 		<Github className="mr-2 h-4 w-4" />
                 		GitHub
             		</LinkButton>
@@ -153,9 +159,9 @@ const Contact: FC<ContactProps> = ({ sitekey, endpoint, anchor }) => {
                       				className="w-full px-3 py-2 border border-zinc-300 rounded-md"
                       				placeholder="Your name"
 									aria-invalid={errors.name ? "true" : "false"}
-									{...register('name', { required: true })} 
+									{...register('name', { required: true, minLength: 6 })} 
                     			/>
-								{ errors.name && <p role="alert" className='mx-2 text-red-500'>{ (errors.name.message as string) || 'Name is required.' }</p> }
+								{ errors.name && <p role="alert" className='mx-2 text-red-500'>{ (errors.name.message as string) || 'Name is required (6 characters minimum).' }</p> }
                   			</TextField>
                   			<TextField className="space-y-2">
                     			<Label htmlFor="email" className="text-sm font-medium text-zinc-700">
@@ -182,22 +188,25 @@ const Contact: FC<ContactProps> = ({ sitekey, endpoint, anchor }) => {
                     			rows={4}
                     			placeholder="Your message"
 								aria-invalid={errors.name ? "true" : "false"}
-								{...register('message', { required: true, minLength: 25 })}
+								{...register('message', { required: true, minLength: 25, /*pattern: NON_EMPTY_MESSAGE_STR*/ })}
                   			></TextArea>
 							{ errors.message && <p role="alert" className='mx-2 text-red-500'>{ (errors.message.message as string) || 'Message is required (minimum 25 characters.' }</p> }
                 		</TextField>
 						<div className="flex flex-col justify-center items-center space-y-2 min-h-8">
 							{ 
 								requestCaptcha ? 
-									<TextField>
-										<Label htmlFor='hidden' className='sr-only'>Captcha</Label>
-										<Input
-											type="hidden" 
-											{...register('captchaToken', { required: true })} 
-										/>
+									<>
+										<TextField>
+											<Label htmlFor='captchaToken' className='sr-only'>Captcha</Label>
+											<Input
+												id='captchaToken'
+												type="hidden" 
+												{...register('captchaToken', { required: true })} 
+											/>
+											{ errors.captchaToken && <p role="alert" className='mx-2 text-red-500'>{ (errors.captchaToken.message as string) || 'Captcha must be solved first.' }</p> }
+										</TextField>
 										<HCaptcha sitekey={sitekey} onVerify={handleToken} ref={captchaRef} />
-										{ errors.captchaToken && <p role="alert" className='mx-2 text-red-500'>{ (errors.captchaToken.message as string) || 'Captcha must be solved first.' }</p> }
-									</TextField> : null 
+									</> : null 
 							}
 						</div>
                 		<Button type='submit' className="py-3 w-full border border-zinc-400/40 rounded-lg">Send Message</Button>
@@ -205,7 +214,7 @@ const Contact: FC<ContactProps> = ({ sitekey, endpoint, anchor }) => {
             	</div>
           	</div>
 			<ToastContainer 
-				position='bottom-right'
+				position='bottom-center'
 				autoClose={3000}
 				hideProgressBar
 				newestOnTop={false}
