@@ -47,7 +47,7 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
 		setSubmitted(true);
 	}, 1000, { immediate: true }));
 
-	const handleToken = (token: string) => setValue('captchaToken', token, { shouldValidate: false });
+	const handleToken = (token: string) => setValue('captchaToken', token, { shouldValidate: true });
 
 	useEffect(() => {
 		console.log('contact loaded');
@@ -196,15 +196,12 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
 							{ 
 								requestCaptcha ? 
 									<>
-										<TextField>
-											<Label htmlFor='captchaToken' className='sr-only'>Captcha</Label>
-											<Input
-												id='captchaToken'
-												type="hidden" 
-												{...register('captchaToken', { required: true })} 
-											/>
-											{ errors.captchaToken && <p role="alert" className='mx-2 text-red-500'>{ (errors.captchaToken.message as string) || 'Captcha must be solved first.' }</p> }
-										</TextField>
+										<Label htmlFor='captchaToken' className='sr-only'>Captcha</Label>
+										<Input
+											type="hidden" 
+											{...register('captchaToken', { required: true })} 
+										/>
+										{ errors.captchaToken && <p role="alert" className='mx-2 text-red-500'>{ (errors.captchaToken.message as string) || 'Captcha must be solved first.' }</p> }
 										<HCaptcha sitekey={sitekey} onVerify={handleToken} ref={captchaRef} />
 									</> : null 
 							}
