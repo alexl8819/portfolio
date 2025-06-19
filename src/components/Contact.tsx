@@ -153,7 +153,7 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
                 		<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   			<TextField className="space-y-2">
                     			<Label htmlFor="name" className="text-sm font-medium text-zinc-700">
-                      				Name
+                      				Full Name
                     			</Label>
                     			<Input
                       				id="name"
@@ -191,7 +191,7 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
 								aria-invalid={errors.name ? "true" : "false"}
 								{...register('message', { required: true, minLength: 25, pattern: VALID_MESSAGE_SEQ })}
                   			></TextArea>
-							{ errors.message && <p role="alert" className='mx-2 text-red-500'>{ (errors.message.message as string) || 'Message is required (minimum 25 characters.' }</p> }
+							{ errors.message && <p role="alert" className='mx-2 text-red-500'>{ (errors.message.message as string) || 'Message is required (minimum 25 characters).' }</p> }
                 		</TextField>
 						<div className="flex flex-col justify-center items-center min-h-10">
 							{ 
