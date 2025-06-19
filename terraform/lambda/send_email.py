@@ -12,7 +12,8 @@ RECIPIENT = os.environ["RECIPIENT_EMAIL"]
 CAPTCHA_SECRET = os.environ["CAPTCHA_SECRET"]
 EMAIL_VALIDATION_APIKEY = os.environ["EMAIL_VALIDATION_APIKEY"]
 
-whitespace_only = r'^\s*$'
+VALID_NAME_SEQUENCE = r'^(?!\s*$)(?!^(.)\1+$)[A-Za-z]+(?: [A-Za-z]+)+$'
+VALID_MESSAGE_SEQUENCE = r'^(?!\s*$)(?!^(.)\1+$)( {0,2}[A-Za-z0-9,!$#@%&-()]+(?: [A-Za-z0-9,!$#@%&-()]+)* {0,2})$'
 
 def validate_email(email):
     url = f"https://emailvalidation.abstractapi.com/v1/?api_key={EMAIL_VALIDATION_APIKEY}&email={email}"
@@ -47,8 +48,7 @@ def handler(event, context):
 
         name = body.get("name")
 
-        # TODO: include regex for name (ex: John D)
-        if not name:
+        if not name or name and not re.fullmatch(VALID_NAME_SEQUENCE, name):
             return {
                 "statusCode": 400,
                 "body": json.dumps({"error": "Name must be included", "field": "name"})
@@ -56,7 +56,7 @@ def handler(event, context):
 
         message = body.get("message")
 
-        if not message or message and len(message) < 25 and re.fullmatch(whitespace_only, message):
+        if not message or message and len(message) < 25 and not re.fullmatch(VALID_MESSAGE_SEQUENCE, message):
             return {
                 "statusCode": 400,
                 "body": json.dumps({"error": "Message must be included", "field": "message"})
@@ -93,7 +93,7 @@ def handler(event, context):
                 "Subject": {"Data": f"New Message from {name}"},
                 "Body": {
                     "Text": {
-                        "Data": f"From: {sender_email} \n\n{message}"
+                        "Data": f"From: {sender_email}\n\n{message}"
                     }
                 },
             }

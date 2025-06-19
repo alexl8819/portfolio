@@ -13,7 +13,8 @@ import { updatePosition } from '../stores/page';
 
 import 'react-toastify/ReactToastify.css';
 
-// const NON_EMPTY_MESSAGE_STR = /^(?!\s*$)[A-Za-z0-9 ]+$/;
+const VALID_NAME_SEQ = /^(?!\s*$)(?!^(.)\1+$)[A-Za-z]+(?: [A-Za-z]+)+$/;
+const VALID_MESSAGE_SEQ = /^(?!\s*$)(?!^(.)\1+$)( {0,2}[A-Za-z0-9,!$#@%&-()]+(?: [A-Za-z0-9,!$#@%&-()]+)* {0,2})$/;
 
 interface ContactProps extends BaseProps {
 	sitekey: string
@@ -69,7 +70,7 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
 					method: 'POST',
 					body: JSON.stringify({
 						name: name.trim(),
-						email,
+						email: email.trim(),
 						message: message.trim(),
 						captchaToken 
 					})
@@ -156,12 +157,12 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
                     			</Label>
                     			<Input
                       				id="name"
-                      				className="w-full px-3 py-2 border border-zinc-300 rounded-md"
+                      				className={`w-full px-3 py-2 outline-none border ${errors.name ? 'border-red-500' : 'border-zinc-300'} rounded-md`}
                       				placeholder="Your name"
 									aria-invalid={errors.name ? "true" : "false"}
-									{...register('name', { required: true, minLength: 6 })} 
+									{...register('name', { required: true, pattern: VALID_NAME_SEQ })} 
                     			/>
-								{ errors.name && <p role="alert" className='mx-2 text-red-500'>{ (errors.name.message as string) || 'Name is required (6 characters minimum).' }</p> }
+								{ errors.name && <p role="alert" className='mx-2 text-red-500'>{ (errors.name.message as string) || 'Name is required.' }</p> }
                   			</TextField>
                   			<TextField className="space-y-2">
                     			<Label htmlFor="email" className="text-sm font-medium text-zinc-700">
@@ -169,7 +170,7 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
                     			</Label>
                     			<Input
                       				id="email"
-                      				className="w-full px-3 py-2 border border-zinc-300 rounded-md"
+                      				className={`w-full px-3 py-2 outline-none border ${errors.name ? 'border-red-500' : 'border-zinc-300'} rounded-md`}
                       				type="email"
                       				placeholder="Your email"
 									aria-invalid={errors.name ? "true" : "false"}
@@ -184,20 +185,21 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
                   			</Label>
                   			<TextArea
                     			id="message"
-                    			className="w-full px-3 py-2 border border-zinc-300 rounded-md resize-none"
+                    			className={`w-full px-3 py-2 outline-none border ${errors.name ? 'border-red-500' : 'border-zinc-300'} rounded-md resize-none`}
                     			rows={4}
                     			placeholder="Your message"
 								aria-invalid={errors.name ? "true" : "false"}
-								{...register('message', { required: true, minLength: 25, /*pattern: NON_EMPTY_MESSAGE_STR*/ })}
+								{...register('message', { required: true, minLength: 25, pattern: VALID_MESSAGE_SEQ })}
                   			></TextArea>
 							{ errors.message && <p role="alert" className='mx-2 text-red-500'>{ (errors.message.message as string) || 'Message is required (minimum 25 characters.' }</p> }
                 		</TextField>
-						<div className="flex flex-col justify-center items-center space-y-2 min-h-8">
+						<div className="flex flex-col justify-center items-center min-h-10">
 							{ 
 								requestCaptcha ? 
 									<>
 										<Label htmlFor='captchaToken' className='sr-only'>Captcha</Label>
 										<Input
+											id="captchaToken"
 											type="hidden" 
 											{...register('captchaToken', { required: true })} 
 										/>
@@ -206,7 +208,7 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
 									</> : null 
 							}
 						</div>
-                		<Button type='submit' className="py-3 w-full border border-zinc-400/40 rounded-lg">Send Message</Button>
+                		<Button type='submit' className="py-3 w-full hover:bg-neutral-800 hover:text-white border border-zinc-400/40 rounded-lg">Send Message</Button>
               		</Form>
             	</div>
           	</div>
