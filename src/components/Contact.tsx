@@ -7,7 +7,6 @@ import { useForm } from 'react-hook-form';
 import debounce from 'debounce';
 
 import { LinkButton, Button, VariantType } from './ui/Button';
-import Bluesky from '../assets/bluesky.svg';
 import { type BaseProps } from '../constants';
 import { updatePosition } from '../stores/page';
 
@@ -21,7 +20,6 @@ interface ContactProps extends BaseProps {
 	endpoint: string
 	links: {
 		github: string
-		bluesky: string
 	}
 }
 
@@ -138,10 +136,6 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
               		I'm currently available for freelance work and <span className="font-bold">full-time</span> positions.
             	</p>
             	<div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-					<LinkButton href={links.bluesky} target="_blank" variant={VariantType.Outline} className="flex justify-center items-center">
-						<img src={Bluesky.src} className='mr-2 w-4 h-4' alt='bluesky logo' />
-                		BlueSky
-              		</LinkButton>
 					<LinkButton href={links.github} target='_blank' variant={VariantType.Outline} className="flex justify-center items-center">
                 		<Github className="mr-2 h-4 w-4" />
                 		GitHub
