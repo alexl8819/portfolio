@@ -53,9 +53,10 @@ const Certifications: FC<CertificationProps> = ({ earned, anchor }) => {
 	return (
 		<div className="px-4 md:px-6">
 			<div className="max-w-4xl mx-auto">
-				<h2 className="text-3xl font-playfair-display font-bold tracking-tight mb-8 flex justify-center items-center text-center">
+				<h2 className="text-3xl font-playfair-display font-bold tracking-tight mb-4 flex justify-center items-center text-center">
 					Certifications
 				</h2>
+				<p className='mb-8 text-md text-gray-600 font-light text-center'>Newer certifications without links are scheduled for examination at a later date</p>
 				<div className="space-y-6">
 					{
 						!sorted.length ? 

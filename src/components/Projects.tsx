@@ -120,9 +120,10 @@ const Projects: FC<ProjectProps> = ({ owner, repositories, anchor }) => {
 	return (
         <div className="px-4 md:px-6">
           	<div className="max-w-4xl mx-auto">
-            	<h2 className="text-3xl font-playfair-display font-bold tracking-tight mb-6 flex justify-center items-center text-center">
+            	<h2 className="text-3xl font-playfair-display font-bold tracking-tight mb-4 flex justify-center items-center text-center">
               		Featured Projects
             	</h2>
+				<p className='mb-8 text-md text-zinc-600 font-light text-center'>Projects are considered works in progress and may experience downtime</p>
             	<div className="flex flex-col-reverse xl:flex-col relative group py-3">
 					{loaded && instanceRef.current && (
 						<div className="flex justify-center mb-4 p-2.5 w-full space-x-3">
