@@ -45,7 +45,7 @@ const Skills: FC<SkillsProps> = ({ anchor, languages, frameworks, tools, databas
         		<h2 className="text-3xl font-playfair-display font-bold tracking-tight mb-4 flex items-center justify-center text-center">
           			Skills / Tools
         		</h2>
-				<p className="mb-8 text-md text-center text-gray-600">This is a brief overview of languages, frameworks/libraries, databases and tools used over the years.</p>
+				<p className="mb-8 text-md font-light text-center text-zinc-600">This is a brief overview of languages, frameworks/libraries, databases and tools used over the years.</p>
 				<div className={`flex flex-col`}>
 					<ol className="list-none grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 						{ 
