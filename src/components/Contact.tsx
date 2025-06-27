@@ -132,7 +132,7 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
         <div className="px-4 md:px-6">
 			<div className="max-w-4xl mx-auto text-center">
             	<h2 className="text-3xl font-playfair-display font-bold tracking-tight mb-4">Get In Touch</h2>
-            	<p className="text-zinc-600 mb-8">
+            	<p className="text-md text-zinc-600 font-light mb-8">
               		I'm currently available for freelance work and <span className="font-bold">full-time</span> positions.
             	</p>
             	<div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -141,7 +141,7 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
                 		GitHub
             		</LinkButton>
             	</div>
-            	<div className="bg-zinc-50 p-6 rounded-lg border border-zinc-100">
+            	<div className="bg-zinc-50 shadow-lg p-6 rounded-lg border border-zinc-100">
               		<h3 className="text-lg font-semibold mb-4">Write a Message</h3>
               		<Form className="space-y-4" onSubmit={onSubmit}>
                 		<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
