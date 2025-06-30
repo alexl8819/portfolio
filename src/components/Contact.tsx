@@ -13,7 +13,7 @@ import { updatePosition } from '../stores/page';
 import 'react-toastify/ReactToastify.css';
 
 const VALID_NAME_SEQ = /^(?!\s*$)(?!^(.)\1+$)[A-Za-z]+(?: [A-Za-z]+)+$/;
-const VALID_MESSAGE_SEQ = /^(?!\s*$)(?!^(.)\1+$)( {0,2}[A-Za-z0-9,!$#@%&-()]+(?: [A-Za-z0-9,!$#@%&-()]+)* {0,2})$/;
+const VALID_MESSAGE_SEQ = /^(?!\s*$)(?!^(.)\1+$)( {0,2}[A-Za-z0-9,!$#?@%&-()]+(?: [A-Za-z0-9,!$#?@%&-()]+)* {0,2})$/;
 
 interface ContactProps extends BaseProps {
 	sitekey: string
