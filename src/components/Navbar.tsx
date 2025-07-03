@@ -32,28 +32,28 @@ const Navbar: FC<NavbarProps> = ({ shouldOpen, toggle }) => {
 		<nav className={`${shouldOpen ? 'flex mt-20 xl:mt-24' : 'hidden'} items-start my-4 md:flex flex-col w-full`}>
 			<ol className='list-none mb-8 w-full flex flex-col xl:justify-center items-start xl:items-center space-y-12'>
 				<li>
-					<Button className={`flex flex-row xl:flex-col items-start xl:items-center font-dm-sans text-sm md:text-base font-medium text-zinc-700/80 hover:text-zinc-800 hover:underline underline-offset-4 transition-colors px-3 py-1.5 rounded-lg`} onPress={scroll('#projects')}>
-              			<FolderGit className='stroke-[1.5] inline-block mr-3 xl:mr-0 xl:mb-1.5' /> Projects
+					<Button className={`group flex flex-row xl:flex-col items-start xl:items-center font-dm-sans text-sm md:text-base font-medium text-zinc-700/80 hover:text-zinc-800 hover:underline underline-offset-4 transition-colors px-3 py-1.5 rounded-lg`} onPress={scroll('#projects')}>
+              			<FolderGit className='stroke-[1.5] group-hover:fill-neutral-400 inline-block mr-3 xl:mr-0 xl:mb-1.5' /> Projects
             		</Button>
 				</li>
             	<li>
-					<Button className={`flex flex-row xl:flex-col items-start xl:items-center font-dm-sans text-sm md:text-base font-medium text-zinc-700/80 hover:text-zinc-800 hover:underline underline-offset-4 transition-colors px-3 py-1.5 rounded-lg`} onPress={scroll('#skills')}>
-              			<FileUser className='stroke-[1.5] inline-block mr-3 xl:mr-0 xl:mb-1.5' /> Skills
+					<Button className={`group flex flex-row xl:flex-col items-start xl:items-center font-dm-sans text-sm md:text-base font-medium text-zinc-700/80 hover:text-zinc-800 hover:underline underline-offset-4 transition-colors px-3 py-1.5 rounded-lg`} onPress={scroll('#skills')}>
+              			<FileUser className='stroke-[1.5] group-hover:fill-neutral-400 inline-block mr-3 xl:mr-0 xl:mb-1.5' /> Skills
             		</Button>
 				</li>
 				<li>
-					<Button className={`flex flex-row xl:flex-col items-start xl:items-center font-dm-sans text-sm md:text-base font-medium text-zinc-700/80 hover:text-zinc-800 hover:underline underline-offset-4 transition-colors px-3 py-1.5 rounded-lg`} onPress={scroll('#certifications')}>
-              			<ShieldUser className='stroke-[1.5] inline-block mr-3 xl:mr-0 xl:mb-1.5' /> Certifications
+					<Button className={`group flex flex-row xl:flex-col items-start xl:items-center font-dm-sans text-sm md:text-base font-medium text-zinc-700/80 hover:text-zinc-800 hover:underline underline-offset-4 transition-colors px-3 py-1.5 rounded-lg`} onPress={scroll('#certifications')}>
+              			<ShieldUser className='stroke-[1.5] group-hover:fill-neutral-400 inline-block mr-3 xl:mr-0 xl:mb-1.5' /> Certifications
             		</Button>
 				</li>
 				<li>
-					<Button className={`flex flex-row xl:flex-col items-start xl:items-center font-dm-sans text-sm md:text-base font-medium text-zinc-700/80 hover:text-zinc-800 hover:underline underline-offset-4 transition-colors px-3 py-1.5 rounded-lg`} onPress={scroll('#about')}>
-              			<User className='stroke-[1.5] inline-block mr-3 xl:mr-0 xl:mb-1.5' /> About
+					<Button className={`group flex flex-row xl:flex-col items-start xl:items-center font-dm-sans text-sm md:text-base font-medium text-zinc-700/80 hover:text-zinc-800 hover:underline underline-offset-4 transition-colors px-3 py-1.5 rounded-lg`} onPress={scroll('#about')}>
+              			<User className='stroke-[1.5] group-hover:fill-neutral-400 inline-block mr-3 xl:mr-0 xl:mb-1.5' /> About
             		</Button>
 				</li>
 				<li>
 					<Button className={`flex flex-row xl:flex-col items-start xl:items-center font-dm-sans text-sm md:text-base justify-center text-black font-bold hover:animate-pulse hover:underline underline-offset-4`} onPress={scroll('#contact')}>
-            			<Send className='stroke-[1.5] inline-block mr-3 xl:mr-0 xl:mb-1.5' /> Contact Me
+            			<Send className='stroke-[1.5] fill-neutral-400 inline-block mr-3 xl:mr-0 xl:mb-1.5' /> Contact Me
           			</Button>
 				</li>
 			</ol>
