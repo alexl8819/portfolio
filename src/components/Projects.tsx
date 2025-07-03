@@ -146,7 +146,7 @@ const Projects: FC<ProjectProps> = ({ owner, repositories, anchor }) => {
     				<div ref={sliderRef} className="keen-slider">
 						{
 							repositories.map((repo, index) => 
-								<div key={index} className='keen-slider__slide scroll-smooth'>
+								<div key={index} className='keen-slider__slide scroll-smooth cursor-grab'>
 									<Project repo={repo} owner={owner} shouldDim={isVertical} isInitial={index === curSlide} />
 								</div>
 							)
