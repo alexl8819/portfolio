@@ -54,7 +54,7 @@ resource "aws_lambda_function" "send_email" {
   function_name    = "send_email_function"
   role             = aws_iam_role.lambda_exec.arn
   handler          = "send_email.handler"
-  runtime          = "python3.9"
+  runtime          = "python3.12"
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
   environment {
     variables = {
