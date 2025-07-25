@@ -28,7 +28,7 @@ const ScreenshotDisplay: FC<ScreenshotDisplayProps> = ({ owner, repo }) => {
             if (cached && cached.timestamp && cached.timestamp.length) {
                 const lastCheck = dayjs(cached.timestamp);
 
-                if (lastCheck && lastCheck.diff(dayjs(), 'h') <= HOURS_STALE_CONTENT) {
+                if (lastCheck && dayjs().diff(lastCheck, 'h') <= HOURS_STALE_CONTENT) {
                     console.log('restoring cached version');
 
                     if (cached.data && cached.data instanceof Blob) {

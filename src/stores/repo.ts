@@ -35,7 +35,7 @@ export async function fetchAndRevalidate (repo: string, owner: string) {
             headers['If-Modified-Since'] = current.lastModified;
         }
 
-        if (current && curLastModified && curLastModified.diff(dayjs(), 'h') <= HOURS_STALE_CONTENT) {
+        if (current && curLastModified && dayjs().diff(curLastModified, 'h') <= HOURS_STALE_CONTENT) {
             console.log('content not stale');
             return;
         }
