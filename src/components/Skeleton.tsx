@@ -48,7 +48,7 @@ export const CertificationSkeleton = memo(({}) => {
             <div className="flex flex-col md:flex-row md:items-center justify-between">
                 <div className="flex flex-col md:flex-row items-center space-x-0 md:space-x-4">
                     <div className='rounded-full shadow-sm md:shadow-md w-12 h-12'>
-                        <div className='rounded-full h-10 md:h-8 w-10 md:w-8 motion-safe:animate-pulse bg-zinc-600'></div>
+                        <div className='rounded-full h-full w-full motion-safe:animate-pulse bg-zinc-600'></div>
                     </div>
                     <div className='mt-3 lg:mt-0 space-y-2'>
                         <div className='h-5 w-24 md:w-10 rounded-lg motion-safe:animate-pulse bg-zinc-600'></div>
