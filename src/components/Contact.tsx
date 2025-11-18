@@ -1,12 +1,11 @@
 import { useEffect, useState, useRef, memo, type FC } from 'react';
 import { Form, Input, Label, TextArea, TextField } from 'react-aria-components';
 import { ToastContainer, toast, Zoom } from 'react-toastify';
-import { Github } from 'lucide-react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { useForm } from 'react-hook-form';
 import debounce from 'debounce';
 
-import { LinkButton, Button, VariantType } from './ui/Button';
+import { Button } from './ui/Button';
 import { type BaseProps } from '../constants';
 import { updatePosition } from '../stores/page';
 
@@ -18,12 +17,9 @@ const VALID_MESSAGE_SEQ = /^(?!\s*$)(?!^(.)\1+$)( {0,2}[A-Za-z0-9,!$#?@%\.&-()]+
 interface ContactProps extends BaseProps {
 	sitekey: string
 	endpoint: string
-	links: {
-		github: string
-	}
 }
 
-const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
+const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint }) => {
 	const [requestCaptcha, setRequestCaptcha] = useState<boolean>(false);
 	const [submitted, setSubmitted] = useState<boolean>(false);
 	const captchaRef = useRef<HCaptcha>(null);
@@ -87,9 +83,6 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
 			const data = await response.json();
 
 			if (!response.ok) {
-				console.log(response.status);
-				console.log(response.statusText);
-
 				if (response.status >= 400) {
 					if (response.status >= 500) {
 						toast.error('Something unexpected happened. Try again later.');
@@ -135,12 +128,6 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
             	<p className="text-md text-zinc-600 font-light mb-8">
               		I'm currently available for freelance work and <span className="font-bold">full-time</span> positions.
             	</p>
-            	<div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-					<LinkButton href={links.github} target='_blank' variant={VariantType.Outline} className="flex justify-center items-center">
-                		<Github className="mr-2 h-4 w-4" />
-                		GitHub
-            		</LinkButton>
-            	</div>
             	<div className="bg-zinc-50 shadow-lg p-6 rounded-lg border border-zinc-100">
               		<h3 className="text-lg font-semibold mb-4">Write a Message</h3>
               		<Form className="space-y-4" onSubmit={onSubmit}>
@@ -202,7 +189,7 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint, links }) => {
 									</> : null 
 							}
 						</div>
-                		<Button type='submit' className="py-3 w-full hover:bg-neutral-800 hover:text-white border border-zinc-400/40 rounded-lg">Send Message</Button>
+                		<Button type='submit' className="py-3 w-full hover:bg-neutral-800 hover:text-white border border-zinc-400/40 rounded-lg" disabled={submitted}>Send Message</Button>
               		</Form>
             	</div>
           	</div>
