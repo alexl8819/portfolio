@@ -68,7 +68,7 @@ const Certifications: FC<CertificationProps> = ({ earned, anchor }) => {
 								>
 									<div className="flex flex-col md:flex-row md:items-center justify-between">
 										<div className="flex flex-col md:flex-row items-center space-x-0 md:space-x-4">
-											<div className='rounded-full shadow-sm md:shadow-md w-12 h-12'>
+											<div className={`rounded-full ${sorted.length ? 'shadow-none': 'shadow-sm md:shadow-md'} w-12 h-12`}>
 												<img src={cert.logo} className="rounded object-cover object-center" alt="issuer" />
 											</div>
 											<div className='mt-3 lg:mt-0'>
