@@ -58,7 +58,7 @@ const Portfolio: FC<PortfolioProps> = ({ name, author, description, links, repos
                     {
                         aboutBlocks && aboutBlocks.length ? <About anchor='about' blocks={aboutBlocks} /> : null
                     }
-                    <Contact anchor='contact' sitekey={contact.sitekey} endpoint={contact.endpoint} links={externalLinks} />
+                    <Contact anchor='contact' sitekey={contact.sitekey} endpoint={contact.endpoint} />
 		        </ObservableContainer>
             </div>
         </main>
