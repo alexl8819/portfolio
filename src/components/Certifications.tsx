@@ -26,8 +26,13 @@ const Certifications: FC<CertificationProps> = ({ earned, anchor }) => {
 	useEffect(() => {
 		const loadLogos = async (certs: Array<Certification>) => {
 			const initializedCerts = [];
-
+			
 			for (const cert of certs) {
+				// Skip if logo is missing/null
+				if (!cert.logo) {
+				    continue;
+				}
+
 				const logoImg = await import(`../assets/logos/${cert.logo}.png`);
 				initializedCerts.push(Object.assign({}, cert, {
 					logo: logoImg.default.src
