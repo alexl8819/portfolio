@@ -49,16 +49,16 @@ setPersistentEngine(storage, {
 
 interface Settings {
 	mode: Theme
-    section: string
+    fragment: string
 }
 
-export const settings = persistentAtom<Settings>('settings', { section: '', mode: Theme.Light }, {
+export const settings = persistentAtom<Settings>('settings', { fragment: '', mode: Theme.Light }, {
     encode: JSON.stringify,
     decode: JSON.parse,
 });
 
-export function updatePosition (section: string) {
-    settings.set(Object.assign({}, settings.get(), { section }));
+export function updatePosition (fragment: string) {
+    settings.set(Object.assign({}, settings.get(), { fragment }));
 }
 
 export function toggleMode () {
