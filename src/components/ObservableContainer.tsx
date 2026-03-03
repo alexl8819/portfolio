@@ -9,11 +9,11 @@ import {
 import { useStore } from '@nanostores/react';
 import { settings } from '../stores/page';
 
-import ProxyStub from './Proxy';
-import { scrollTo } from '../util';
+import Fragment from './Fragment';
+import { scrollTo, getElement } from '../util';
 
 const ObservableContainer: FC<PropsWithChildren> = ({ children }) => {
-    const { section }= useStore(settings);
+    const { fragment } = useStore(settings);
     const componentRefs = useRef<Array<HTMLElement | null>>([]);
     const [refsReady, setRefsReady] = useState(false);
     const [obsrvReady, setObsrvReady] = useState(false);
@@ -58,23 +58,23 @@ const ObservableContainer: FC<PropsWithChildren> = ({ children }) => {
     }, [refsReady]);
 
     useEffect(() => {
-        if (section && section.length) {
-            scrollTo(section);
+        if (fragment && fragment.length && getElement(fragment) !== null) {
+            scrollTo(fragment);
         }
     }, [obsrvReady]);
 
     return (
         <div className='w-full xl:w-2/3'>
             { 
-                Children.map(children, (child: any, index) => (
-                    <ProxyStub 
+                children ? Children.map(Array.prototype.filter.call(children, (child) => child !== null), (child: any, index) => (
+                    <Fragment 
                         key={index} 
                         ref={(el: any) => (componentRefs.current[index] = el)}
-                        sectionAnchor={child.props.anchor}
+                        anchor={child.props.anchor}
                         isVisible={componentRefs.current[index] === notifiedRef}>
                         <child.type {...child.props} />
-                    </ProxyStub>
-                ))
+                    </Fragment>
+                )) : null
             }
         </div>
     );
