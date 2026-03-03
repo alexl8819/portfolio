@@ -22,10 +22,10 @@ const ProxyStub = forwardRef<HTMLElement, PropsWithChildren<ProxyProps>>(({ chil
     }, [isVisible]);
 
     return (
-        <section
+        <div
             id={sectionAnchor && sectionAnchor.length ? sectionAnchor : undefined}
             ref={ref}
-            className="proxy min-h-screen bg-primary-light px-4 md:px-0 py-16 md:py-24 opacity-0 transition-opacity duration-[1.5s] ease-in-out translate-y-20 will-change-transform"
+            className="proxy min-h-screen bg-[var(--fg)] px-4 md:px-0 py-16 md:py-24 opacity-0 transition-opacity duration-[1.5s] ease-in-out translate-y-20 will-change-transform"
         >
             {
                 visibilityEnabled ? 
@@ -33,7 +33,7 @@ const ProxyStub = forwardRef<HTMLElement, PropsWithChildren<ProxyProps>>(({ chil
                     { children }
                 </Suspense> : null
             }
-        </section>
+        </div>
     )
 });
 
