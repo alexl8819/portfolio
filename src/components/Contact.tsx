@@ -123,7 +123,7 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint }) => {
 	
 	return (
         <div className="px-4 md:px-6">
-			<div className="max-w-4xl mx-auto text-center">
+			<section className="max-w-4xl mx-auto text-center">
             	<h2 className="text-3xl font-playfair-display font-bold tracking-tight mb-4">Get In Touch</h2>
             	<p className="text-md text-zinc-600 font-light mb-8">
               		I'm currently available for freelance work and <span className="font-bold">full-time</span> positions.
@@ -192,7 +192,7 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint }) => {
                 		<Button type='submit' className="py-3 w-full hover:bg-neutral-800 hover:text-white border border-zinc-400/40 rounded-lg" disabled={submitted}>Send Message</Button>
               		</Form>
             	</div>
-          	</div>
+          	</section>
 			<ToastContainer 
 				position='bottom-center'
 				autoClose={3000}
