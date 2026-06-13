@@ -83,10 +83,6 @@ export const transformIntoSkill = (skillType: Array<SkillLike>) => {
     }));
 }
 
-export const getShortName = (role: string) => {
-    return role.split('-')[0];
-}
-
 export const getCommonIcon = (language: string) => {
     switch (language.toLowerCase()) {
         case 'python':
