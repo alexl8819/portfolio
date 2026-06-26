@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, memo, type FC } from 'react';
 import { Form, Input, Label, TextArea, TextField } from 'react-aria-components';
 import { ToastContainer, toast, Zoom } from 'react-toastify';
+import { SendIcon } from 'lucide-react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { useForm } from 'react-hook-form';
 import debounce from 'debounce';
@@ -125,7 +126,7 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint }) => {
         <div className="px-4 md:px-6">
 			<section className="max-w-4xl mx-auto text-center">
             	<h2 className="text-3xl font-playfair-display font-bold tracking-tight mb-4">Get In Touch</h2>
-            	<p className="text-md text-[var(--section-description)] font-light mb-8">
+            	<p className="text-md text-zinc-600 dark:text-stone-400 font-light mb-8">
               		I'm currently available for freelance work and <span className="font-bold">full-time</span> positions.
             	</p>
             	<div className="bg-mauve-50 dark:bg-stone-900 shadow-lg p-6 rounded-lg border border-zinc-100 dark:border-stone-800">
@@ -189,7 +190,11 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint }) => {
 									</> : null 
 							}
 						</div>
-                		<Button type='submit' className="py-3 w-full hover:bg-neutral-800 hover:text-white dark:hover:bg-neutral-200 dark:hover:text-black border border-zinc-400/40 rounded-lg" disabled={submitted}>Send Message</Button>
+                		<Button type='submit' className="py-3 flex justify-center w-full hover:bg-neutral-800 hover:text-white dark:hover:bg-neutral-200 dark:hover:text-black border border-zinc-400/40 rounded-lg" disabled={submitted}>
+							<div className='flex flex-row'>
+								<SendIcon className='mr-3' /> Send
+							</div>
+						</Button>
               		</Form>
             	</div>
           	</section>
