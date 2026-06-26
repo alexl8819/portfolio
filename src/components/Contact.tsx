@@ -125,20 +125,20 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint }) => {
         <div className="px-4 md:px-6">
 			<section className="max-w-4xl mx-auto text-center">
             	<h2 className="text-3xl font-playfair-display font-bold tracking-tight mb-4">Get In Touch</h2>
-            	<p className="text-md text-zinc-600 font-light mb-8">
+            	<p className="text-md text-[var(--section-description)] font-light mb-8">
               		I'm currently available for freelance work and <span className="font-bold">full-time</span> positions.
             	</p>
-            	<div className="bg-zinc-50 shadow-lg p-6 rounded-lg border border-zinc-100">
+            	<div className="bg-mauve-50 dark:bg-stone-900 shadow-lg p-6 rounded-lg border border-zinc-100 dark:border-stone-800">
               		<h3 className="text-lg font-semibold mb-4">Write a Message</h3>
               		<Form className="space-y-4" onSubmit={onSubmit}>
                 		<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   			<TextField className="space-y-2">
-                    			<Label htmlFor="name" className="text-sm font-medium text-zinc-700">
+                    			<Label htmlFor="name" className="text-sm font-medium text-zinc-700 dark:text-stone-400">
                       				Full Name
                     			</Label>
                     			<Input
                       				id="name"
-                      				className={`w-full px-3 py-2 outline-none border ${errors.name ? 'border-red-500' : 'border-zinc-300'} rounded-md`}
+                      				className={`w-full px-3 py-2 outline-none border ${errors.name ? 'border-red-500' : 'border-zinc-300 dark:border-zinc-700'} rounded-md`}
                       				placeholder="Your name"
 									aria-invalid={errors.name ? "true" : "false"}
 									{...register('name', { required: true, pattern: VALID_NAME_SEQ })} 
@@ -146,12 +146,12 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint }) => {
 								{ errors.name && <p role="alert" className='mx-2 text-red-500'>{ (errors.name.message as string) || 'Name is required.' }</p> }
                   			</TextField>
                   			<TextField className="space-y-2">
-                    			<Label htmlFor="email" className="text-sm font-medium text-zinc-700">
+                    			<Label htmlFor="email" className="text-sm font-medium text-zinc-700 dark:text-stone-400">
                       				Email
                     			</Label>
                     			<Input
                       				id="email"
-                      				className={`w-full px-3 py-2 outline-none border ${errors.name ? 'border-red-500' : 'border-zinc-300'} rounded-md`}
+                      				className={`w-full px-3 py-2 outline-none border ${errors.name ? 'border-red-500' : 'border-zinc-300 dark:border-zinc-700'} rounded-md`}
                       				type="email"
                       				placeholder="Your email"
 									aria-invalid={errors.name ? "true" : "false"}
@@ -161,12 +161,12 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint }) => {
                   			</TextField>
                 		</div>
                 		<TextField className="space-y-2">
-                  			<Label htmlFor="message" className="text-sm font-medium text-zinc-700">
+                  			<Label htmlFor="message" className="text-sm font-medium text-zinc-700 dark:text-stone-400">
                     			Message
                   			</Label>
                   			<TextArea
                     			id="message"
-                    			className={`w-full px-3 py-2 outline-none border ${errors.name ? 'border-red-500' : 'border-zinc-300'} rounded-md resize-none`}
+                    			className={`w-full px-3 py-2 outline-none border ${errors.name ? 'border-red-500' : 'border-zinc-300 dark:border-zinc-700'} rounded-md resize-none`}
                     			rows={4}
                     			placeholder="Your message"
 								aria-invalid={errors.name ? "true" : "false"}
@@ -189,7 +189,7 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint }) => {
 									</> : null 
 							}
 						</div>
-                		<Button type='submit' className="py-3 w-full hover:bg-neutral-800 hover:text-white border border-zinc-400/40 rounded-lg" disabled={submitted}>Send Message</Button>
+                		<Button type='submit' className="py-3 w-full hover:bg-neutral-800 hover:text-white dark:hover:bg-neutral-200 dark:hover:text-black border border-zinc-400/40 rounded-lg" disabled={submitted}>Send Message</Button>
               		</Form>
             	</div>
           	</section>

@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-    --default-font-family: 'Inter Variable', sans-serif;
-    --font-playfair-display: 'Playfair Display Variable', serif;
     --font-source-sans: 'Source Sans 3 Variable', sans-serif;
-    --color-primary-light: oklch(0.9612 0 0);
+    --font-playfair-display: 'Playfair Display Variable', serif;
+    --font-work-sans: 'Work Sans Variable', serif;
+    --font-fraunces: 'Fraunces Variable', serif;
+
+    --default-font-family: 'Inter Variable', sans-serif;
+
+    --color-custom-light-fg: oklch(0.9612 0 0);
 }
