@@ -25,7 +25,7 @@ const Fragment = forwardRef<HTMLElement, PropsWithChildren<FragmentProps>>(({ ch
         <div
             id={anchor && anchor.length ? anchor : undefined}
             ref={ref}
-            className="proxy min-h-screen bg-[var(--fg)] px-4 md:px-0 py-16 md:py-24 opacity-0 transition-opacity duration-[1.5s] ease-in-out translate-y-20 will-change-transform"
+            className="proxy min-h-screen bg-[var(--color-custom-light-fg)] dark:bg-zinc-700 px-4 md:px-0 py-16 md:py-24 opacity-0 transition-opacity duration-[1.5s] ease-in-out translate-y-20 will-change-transform"
         >
             {
                 visibilityEnabled ? 
