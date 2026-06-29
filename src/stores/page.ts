@@ -64,6 +64,6 @@ export function updatePosition (fragment: string) {
 export function toggleMode () {
 	const { mode } = settings.get();
 	settings.set(Object.assign({}, settings.get(), {
-		mode: mode ? false : true
+		mode: mode === Theme.Light ? Theme.Dark : Theme.Light
 	}));
 }
