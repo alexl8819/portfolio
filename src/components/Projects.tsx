@@ -126,6 +126,11 @@ const Projects: FC<ProjectProps> = ({ owner, repositories, anchor }) => {
 				<p className='mb-8 text-md text-zinc-600 dark:text-stone-400 font-light text-center'>Projects are considered works in progress and may experience downtime</p>
             	<div className="flex flex-col-reverse xl:flex-col relative group py-3">
 					{loaded && instanceRef.current && (
+							<div className={`${!showHover ? 'hidden' : 'group-hover:flex'} xl:hidden -mt-3 flex-col w-full justify-center items-center text-center pointer-events-none z-20`}>
+								<span className='text-sm/relaxed opacity-70 underline underline-offset-4'>Swipe to see next card ⟶</span>
+							</div>
+        			)}
+					{loaded && instanceRef.current && (
 						<div className="flex justify-center mb-4 p-2.5 w-full space-x-3">
           					{[
             					...Array(instanceRef.current.track.details.slides.length).keys(),
@@ -151,12 +156,7 @@ const Projects: FC<ProjectProps> = ({ owner, repositories, anchor }) => {
 								</div>
 							)
             			}
-    				</div>
-					{loaded && instanceRef.current && (
-						<div className={`${!showHover ? 'hidden' : 'group-hover:flex' } justify-center items-end absolute bottom-0 left-20 sm:left-30 md:left-80 text-center pointer-events-none bg-transparent z-20`}>
-							<span className='text-sm/relaxed opacity-70 underline underline-offset-4'>Swipe to see next card ⟶</span>
-						</div>
-        			)}
+    				</div>	
 				</div>
           	</section>
       </div>
