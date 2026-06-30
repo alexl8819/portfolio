@@ -12,11 +12,11 @@ interface Skill {
 }
 
 interface SkillsProps extends BaseProps {
-	languages: Array<Skill>
-	frameworks: Array<Skill>
-	databases: Array<Skill>
-	tools: Array<Skill>,
-	platforms: Array<Skill>
+	languages: Array<Skill> | []
+	frameworks: Array<Skill> | []
+	databases: Array<Skill> | []
+	tools: Array<Skill> | []
+	platforms: Array<Skill> | []
 }
 
 const Skills: FC<SkillsProps> = ({ anchor, languages, frameworks, tools, databases, platforms }) => {
@@ -41,27 +41,27 @@ const Skills: FC<SkillsProps> = ({ anchor, languages, frameworks, tools, databas
 
   	return (
     	<div className="px-4 md:px-6">
-      		<div className="max-w-4xl mx-auto">
+      		<section className="max-w-4xl mx-auto">
         		<h2 className="text-3xl font-playfair-display font-bold tracking-tight mb-4 flex items-center justify-center text-center">
           			Skills / Tools
         		</h2>
-				<p className="mb-8 text-md font-light text-center text-zinc-600">This is a brief overview of languages, frameworks/libraries, databases and tools used over the years.</p>
+				<p className="mb-8 text-md font-light text-center text-zinc-600 dark:text-stone-400">This is a brief overview of languages, frameworks/libraries, databases and tools used over the years.</p>
 				<div className={`flex flex-col`}>
 					<ol className="list-none grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 						{ 
 							skills ?
 								(
 									Array.from(skills?.values()).map(({ name, icon, highlight }) => (
-										<li key={name} className={`bg-white ${highlight ? 'opacity-100': 'opacity-50 hover:opacity-100'} p-5 rounded-lg border border-zinc-100 shadow-sm hover:shadow-md transition-shadow flex flex-col items-center transform hover:scale-110 hover:transition-transform duration-300 ease-out`}>
-              								<SkillIcon name={name} icon={icon} className={`h-8 w-8 mb-2 ${highlight ? 'fill-black' : ''}`} /> {/* fill-yellow-500 */}
-											<span className={`line-clamp-1 text-center ${highlight ? 'font-semibold' : 'font-medium'} select-none`}>{ name }</span> {/* text-yellow-500 */}
+										<li key={name} className={`bg-white dark:bg-stone-900 ${highlight ? 'opacity-100': 'opacity-50 hover:opacity-100'} p-5 rounded-lg border border-zinc-100 dark:border-neutral-900 shadow-sm hover:shadow-md transition-shadow flex flex-col items-center transform hover:scale-110 hover:transition-transform duration-300 ease-out`}>
+              								<SkillIcon name={name} icon={icon} className={`h-8 w-8 mb-2 ${highlight ? 'fill-black dark:fill-white' : ''}`} />
+											<span className={`line-clamp-1 text-center ${highlight ? 'font-semibold' : 'font-medium'} select-none`}>{ name }</span>
             							</li>
 								)
 							)) : null
 						}
 					</ol>
 				</div>
-      		</div>
+      		</section>
     	</div>
 	);
 }
