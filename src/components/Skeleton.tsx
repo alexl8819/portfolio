@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { Card, CardHeader, CardContent } from './ui/Card';
 
-export const SectionLoaderSkeleton = memo(({}) => (<div className="min-h-screen flex justify-center items-center text-center">Loading...</div>));
+export const SectionLoaderSkeleton = memo(({}) => (<div className="min-h-screen flex justify-center items-center text-center text-black dark:text-white">Loading...</div>));
 
 export const ProjectCardSkeleton = memo(({ tags = 8 }: { tags?: number }) => {
     return (
