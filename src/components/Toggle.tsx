@@ -5,7 +5,7 @@ import { Button } from './ui/Button';
 import { Theme } from '../constants';
 import { settings, toggleMode } from '../stores/page';
 
-export const ThemeToggle = () => {
+const ThemeToggle = () => {
     const { mode } = useStore(settings);
     return (
         <Button onPress={() => toggleMode()} disabled={false}>
@@ -13,4 +13,6 @@ export const ThemeToggle = () => {
             <span className='sr-only'>Lightbulb</span>
         </Button>
     )
-} 
+};
+
+export default ThemeToggle;
