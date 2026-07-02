@@ -129,7 +129,7 @@ const Contact: FC<ContactProps> = ({ anchor, sitekey, endpoint }) => {
             	<p className="text-md text-zinc-600 dark:text-stone-400 font-light mb-8">
               		I'm currently available for freelance work and <span className="font-bold">full-time</span> positions.
             	</p>
-            	<div className="bg-mauve-50 dark:bg-neutral-800 shadow-lg p-6 rounded-lg border border-zinc-100 dark:border-stone-800">
+            	<div className="bg-white dark:bg-neutral-800 shadow-lg p-6 rounded-lg border border-zinc-100 dark:border-stone-800">
               		<h3 className="text-lg font-semibold mb-4">Write a Message</h3>
               		<Form className="space-y-4" onSubmit={onSubmit}>
                 		<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
