@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
+---
+
+<Layout>
+	<div class="min-h-screen bg-[var(--bg)] text-[var(--text)]">
+		<Header enabledAnchors={[]} client:load />
+		<main class="min-h-screen flex justify-center items-center">
+			<section>
+				<h1 class="text-2xl lg:text-[8rem] text-shadow-sm font-medium text-center text-shadow-blue-950">404: Page not found</h1>
+			</section>
+        </main>
+		<Footer client:visible />
+	</div>
+</Layout>
