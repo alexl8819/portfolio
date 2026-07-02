@@ -1,0 +1,89 @@
+---
+export function getStaticPaths() {
+	return [
+    { params: { role: 'uu9AsP' }},
+    { params: { role: 'NQo5Ad' }},
+  ];
+}
+
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer';
+import Header from '../../components/Header';
+import Portfolio from '../../components/Portfolio';
+import ThemedProvider from '../../components/ThemedView';
+
+// new: build expected anchors ahead of time based on data in env
+const anchors = [];
+
+const { role } = Astro.params;
+
+const author = import.meta.env.AUTHOR;
+const name = import.meta.env.NAME;
+
+const roles = JSON.parse(atob(import.meta.env.ROLES));
+
+const description = roles[role]['description'];
+const links = roles[role]['links'];
+const repos = roles[role]['repos'];
+
+if (repos && repos.length) {
+	anchors.push('projects');
+}
+
+const skills = roles[role]['skills'];
+
+const { languages, frameworks, databases, tools, platforms } = skills;
+
+if (languages && languages.length || frameworks && frameworks.length || databases && databases.length || tools && tools.length || platforms && platforms.length) {
+	anchors.push('skills');
+}
+
+const certs = roles[role]['earned_certs'];
+
+if (certs && certs.length) {
+	anchors.push('certifications');
+}
+
+const aboutMe = roles[role]['about_me'];
+
+if (aboutMe && aboutMe.length) {
+	anchors.push('about');
+}
+
+const sitekey = import.meta.env.SITEKEY;
+
+if (!sitekey) {
+	throw new Error('sitekey must be defined for captcha');
+}
+
+const endpoint = import.meta.env.ENDPOINT;
+
+if (!endpoint) {
+	throw new Error('endpoint must be defined to send contact messages');
+}
+
+if (sitekey && sitekey.length && endpoint && endpoint.length) {
+	anchors.push('contact');
+}
+---
+
+<Layout>
+	<ThemedProvider client:load>
+		<Header enabledAnchors={anchors} client:load />
+		<Portfolio
+			role={role}
+			author={author}
+			name={name} 
+			description={description}
+			links={links}
+			repos={repos || []}
+			skills={skills}
+			certs={certs || []}
+			aboutMe={aboutMe || []}
+			contact={{sitekey, endpoint}}
+			enabledAnchors={anchors}
+			client:visible
+		/>
+		<Footer client:visible />
+	</ThemedProvider>
+</Layout>
