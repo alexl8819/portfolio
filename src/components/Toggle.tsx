@@ -3,13 +3,13 @@ import { LightbulbIcon } from 'lucide-react';
 
 import { Button } from './ui/Button';
 import { Theme } from '../constants';
-import { settings, toggleMode } from '../stores/page';
+import { theme, toggleMode } from '../stores/page';
 
 const ThemeToggle = () => {
-    const { mode } = useStore(settings);
+    const th = useStore(theme, { ssr: 'initial' });
     return (
         <Button onPress={() => toggleMode()} disabled={false}>
-            <LightbulbIcon className={`w-8 h-6 ${mode === Theme.Light ? 'fill-amber-300 hover:fill-white': 'hover:fill-amber-300' }`} />
+            <LightbulbIcon className={`w-8 h-6 ${th === Theme.Light ? 'fill-amber-300 hover:fill-white': 'hover:fill-amber-300' }`} />
             <span className='sr-only'>Lightbulb</span>
         </Button>
     )

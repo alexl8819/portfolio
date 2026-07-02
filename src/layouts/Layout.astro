@@ -5,7 +5,9 @@ import '@fontsource-variable/inter';
 import '@fontsource-variable/playfair-display';
 // Supports weights 200-900
 import '@fontsource-variable/source-sans-3';
-// Tailwind
+// Supports weights 100-900
+import '@fontsource-variable/work-sans';
+// Tailwind defaults
 import '../styles/global.css';
 ---
 
@@ -21,6 +23,14 @@ import '../styles/global.css';
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 		<meta name="generator" content={Astro.generator} />
 		<title>alexl8819's portfolio</title>
+		<script is:inline>
+    		(() => {
+      			const stored = localStorage.getItem('theme');
+      			const dark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+      			document.documentElement.classList.toggle('dark', dark);
+    		})();
+  		</script>
 	</head>
 	<body>
 		<slot />

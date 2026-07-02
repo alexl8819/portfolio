@@ -1,5 +1,7 @@
 import { persistentAtom } from '@nanostores/persistent';
+import { atom } from 'nanostores';
 import { Theme } from '../constants';
+import { setTheme } from '../util';
 
 // https://github.com/nanostores/persistent/issues/54
 
@@ -48,11 +50,12 @@ setPersistentEngine(storage, {
 });*/
 
 interface Settings {
-	mode: Theme
     fragment: string
 }
 
-export const settings = persistentAtom<Settings>('settings', { fragment: '', mode: Theme.Light }, {
+export const theme = atom<Theme>(Theme.Light);
+
+export const settings = persistentAtom<Settings>('settings', { fragment: '' }, {
     encode: JSON.stringify,
     decode: JSON.parse,
 });
@@ -61,9 +64,12 @@ export function updatePosition (fragment: string) {
     settings.set(Object.assign({}, settings.get(), { fragment }));
 }
 
+export function setInitial (initial: Theme) {
+	theme.set(initial);
+}
+
 export function toggleMode () {
-	const { mode } = settings.get();
-	settings.set(Object.assign({}, settings.get(), {
-		mode: mode === Theme.Light ? Theme.Dark : Theme.Light
-	}));
+	const nextTheme = theme.get() === Theme.Light ? Theme.Dark : Theme.Light;
+	setTheme(nextTheme);
+	theme.set(nextTheme);
 }

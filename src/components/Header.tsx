@@ -4,7 +4,7 @@ import { useState, useEffect, memo, type FC } from 'react';
 
 import { Button } from './ui/Button';
 import Navbar from './Navbar';
-import { ThemeToggle } from './Toggle';
+import ThemeToggle from './Toggle';
 
 interface HeaderProps {
 	enabledAnchors: Array<string>

@@ -1,24 +1,18 @@
 import { memo, useEffect, type FC, type PropsWithChildren } from 'react';
-import { useStore } from '@nanostores/react';
 
-import { settings, toggleMode } from '../stores/page';
+import { setInitial } from '../stores/page';
 import { Theme } from '../constants';
 
-const ThemedPageView: FC<PropsWithChildren> = ({ children }) => {
-    const { mode } = useStore(settings);
-
+const ThemedProvider: FC<PropsWithChildren> = ({ children }) => {
     useEffect(() => {
-        const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
-        if (prefersDarkTheme.matches && mode === Theme.Light) {
-            toggleMode();
-        }
+        setInitial(document.documentElement.classList.contains('dark') ? Theme.Dark : Theme.Light);
     }, []);
 
     return (
-        <div className={mode == Theme.Dark ? 'dark' : 'light'}>
+        <div className='min-h-screen bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300'>
             { children }
         </div>
     )
 }
 
-export default memo(ThemedPageView);
+export default memo(ThemedProvider);

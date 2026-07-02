@@ -4,7 +4,7 @@ import ObservableContainer from './ObservableContainer';
 import Hero from './Hero';
 import Profile from './Profile';
 import { transformIntoSkill } from '../util';
-import { ThemeToggle } from './Toggle';
+import ThemeToggle from './Toggle';
 
 const About = lazy(() => import('./About'));
 const Skills = lazy(() => import('./Skills'));
@@ -47,7 +47,7 @@ const Portfolio: FC<PortfolioProps> = ({ name, author, description, links, repos
             <Hero name={name.split(' ')[0]} introduction={description} nextAnchor={enabledAnchors[0]} />
             <div className='relative flex flex-row w-full font-[var(--default-font)]'>
                 <div className='hidden lg:flex fixed w-auto z-3 top-5 left-5'>
-                    <ThemeToggle />
+                    <ThemeToggle/>
                 </div>
                 <Profile name={name} role={role} description={description} anchors={enabledAnchors} links={links} />
 		        <ObservableContainer>
