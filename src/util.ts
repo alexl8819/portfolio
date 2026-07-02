@@ -53,7 +53,7 @@ import { twMerge } from 'tailwind-merge';
 import { tv } from 'tailwind-variants';
 import { composeRenderProps } from 'react-aria-components';
 
-import { type SkillLike } from './constants';
+import { Theme, type SkillLike } from './constants';
 
 export const getElement = (selector: string, container?: HTMLElement) => {
     const element: Element | null = (container || document).querySelector(selector);
@@ -73,6 +73,11 @@ export const scrollTo = (selector: string, container?: HTMLElement) => {
     }
     
     element.scrollIntoView({ behavior: 'instant' });
+}
+
+export const setTheme = (theme: Theme) => {
+    document.documentElement.classList.toggle('dark', theme === Theme.Dark);
+    localStorage.setItem('theme', theme);
 }
 
 export const transformIntoSkill = (skillType: Array<SkillLike>) => {
