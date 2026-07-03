@@ -35,9 +35,35 @@ import {
     SiGooglecloud,
     SiDebian,
     SiVultr,
+    SiSplunk,
+    SiSnort,
+    SiWireshark,
+    SiVirustotal,
+    SiGitforwindows,
+    SiParrotsecurity,
+    SiKalilinux,
+    SiTryhackme,
+    SiHackthebox,
+    SiKibana,
+    SiOpnsense,
+    SiProxmox
 } from '@icons-pack/react-simple-icons';
+import count from 'word-count';
+import { twMerge } from 'tailwind-merge';
+import { tv } from 'tailwind-variants';
+import { composeRenderProps } from 'react-aria-components';
 
-import { type SkillLike } from './constants';
+import { Theme, type SkillLike } from './constants';
+
+export const getElement = (selector: string, container?: HTMLElement) => {
+    const element: Element | null = (container || document).querySelector(selector);
+    
+    if (!element) {
+    	return null;
+    }
+    
+    return element;
+}
 
 export const scrollTo = (selector: string, container?: HTMLElement) => {
     const element: Element | null = (container || document).querySelector(selector);
@@ -47,6 +73,11 @@ export const scrollTo = (selector: string, container?: HTMLElement) => {
     }
     
     element.scrollIntoView({ behavior: 'instant' });
+}
+
+export const setTheme = (theme: Theme) => {
+    document.documentElement.classList.toggle('dark', theme === Theme.Dark);
+    localStorage.setItem('theme', theme);
 }
 
 export const transformIntoSkill = (skillType: Array<SkillLike>) => {
@@ -131,7 +162,57 @@ export const getCommonIcon = (language: string) => {
             return SiVultr;
         case 'debian':
             return SiDebian;
-        default:
+        case 'splunk':
+	        return SiSplunk;
+	    case 'kibana':
+	        return SiKibana;
+	    case 'snort':
+	        return SiSnort;
+	    case 'wireshark':
+	        return SiWireshark;
+        case 'virustotal':
+            return SiVirustotal;
+	    case 'gitforwindows':
+	        return SiGitforwindows;
+	    case 'parrotsecurity':
+	        return SiParrotsecurity;
+	    case 'kalilinux':
+	        return SiKalilinux;
+        case 'tryhackme':
+            return SiTryhackme;
+        case 'hackthebox':
+            return SiHackthebox;
+	    case 'opnsense':
+	        return SiOpnsense;
+	    case 'proxmox':
+	        return SiProxmox;
+	    default:
             return null;
     }
+}
+
+export function getApproxTimeToRead (content: string, wordsPerMinute: number = 200) {
+    const minutes = count(content) / wordsPerMinute;
+    return Math.ceil(parseFloat(minutes.toFixed(2)));
+}
+
+export function invertCase (input: string, snakeCase: boolean) {
+    return snakeCase ? input.replaceAll(/\-/g, '_') : input.replaceAll(/\_/g, '-');
+}
+
+export namespace Tailwind {
+    export const merge = twMerge;
+    export const variants = tv;
+    export function composeTailwindRenderProps<T>(className: string | ((v: T) => string) | undefined, tw: string): string | ((v: T) => string) {
+        return composeRenderProps(className, (className) => twMerge(tw, className));
+    };
+    export const focusRing = tv({
+        base: 'outline outline-blue-600 dark:outline-blue-500 forced-colors:outline-[Highlight] outline-offset-2',
+        variants: {
+            isFocusVisible: {
+                false: 'outline-0',
+                true: 'outline-2'
+            }
+        }
+    });
 }

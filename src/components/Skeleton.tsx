@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { Card, CardHeader, CardContent } from './ui/Card';
 
-export const SectionLoaderSkeleton = memo(({}) => (<div className="min-h-screen flex justify-center items-center text-center">Loading...</div>));
+export const SectionLoaderSkeleton = memo(({}) => (<div className="min-h-screen flex justify-center items-center text-center text-black dark:text-white">Loading...</div>));
 
 export const ProjectCardSkeleton = memo(({ tags = 8 }: { tags?: number }) => {
     return (
@@ -43,13 +43,35 @@ export const ProjectCardSkeleton = memo(({ tags = 8 }: { tags?: number }) => {
 export const CertificationSkeleton = memo(({}) => {
     return (
         <div 
-            className="bg-white p-6 rounded-lg select-none border border-zinc-100 opacity-80 hover:opacity-100 shadow-sm hover:shadow-md transition-shadow"
+            className="bg-white dark:bg-stone-900 p-6 rounded-lg select-none border border-zinc-100 dark:border-neutral-700 opacity-80 hover:opacity-100 shadow-sm hover:shadow-md transition-shadow"
         >
             <div className="flex flex-col md:flex-row md:items-center justify-between">
                 <div className="flex flex-col md:flex-row items-center space-x-0 md:space-x-4">
                     <div className='rounded-full shadow-sm md:shadow-md w-12 h-12'>
                         <div className='rounded-full h-full w-full motion-safe:animate-pulse bg-zinc-600'></div>
                     </div>
+                    <div className='mt-3 lg:mt-0 space-y-2'>
+                        <div className='h-5 w-24 md:w-10 rounded-lg motion-safe:animate-pulse bg-zinc-600'></div>
+                        <div className="h-5 w-24 rounded-lg motion-safe:animate-pulse bg-zinc-600"></div>
+                    </div>
+                </div>
+                <div className='flex justify-center items-center'>
+                    <div className='flex flex-row justify-center items-center mt-2 md:mt-0 rounded-lg h-12 w-40 motion-safe:animate-pulse bg-zinc-600'></div>
+                </div>
+            </div>
+            <div className="mt-4 h-6 w-full rounded-lg motion-safe:animate-pulse bg-zinc-600"></div>
+        </div>
+    );
+});
+
+
+export const BlogSkeleton = memo(({}) => {
+    return (
+        <div 
+            className="bg-white p-6 rounded-lg select-none border border-zinc-100 opacity-80 hover:opacity-100 shadow-sm hover:shadow-md transition-shadow"
+        >
+            <div className="flex flex-col md:flex-row md:items-center justify-between">
+                <div className="flex flex-col md:flex-row items-center space-x-0 md:space-x-4">
                     <div className='mt-3 lg:mt-0 space-y-2'>
                         <div className='h-5 w-24 md:w-10 rounded-lg motion-safe:animate-pulse bg-zinc-600'></div>
                         <div className="h-5 w-24 rounded-lg motion-safe:animate-pulse bg-zinc-600"></div>

@@ -53,7 +53,6 @@ const ScreenshotDisplay: FC<ScreenshotDisplayProps> = ({ owner, repo }) => {
             const timestamp = dayjs().toISOString();
             
             if (!res.ok) {
-                console.log(res.statusText);
                 await assetLoader.setItem(breakpointKey, { timestamp });
                 return;
             }
@@ -62,8 +61,6 @@ const ScreenshotDisplay: FC<ScreenshotDisplayProps> = ({ owner, repo }) => {
             const arrBuf = await data.arrayBuffer();
 
             const offscreenCanvas = document.createElement('canvas').transferControlToOffscreen();
-
-            // console.log(`original size: ` + arrBuf.byteLength);
 
             let ci: ArrayBuffer | null = null;
 
@@ -76,8 +73,6 @@ const ScreenshotDisplay: FC<ScreenshotDisplayProps> = ({ owner, repo }) => {
             if (!ci) {
                 return;
             }
-
-            // console.log(`compressed size: ${ci.byteLength}`);
             
             const blob = new Blob([ci as ArrayBuffer], { type: 'image/webp' });
             await assetLoader.setItem(breakpointKey, { data: blob, timestamp });

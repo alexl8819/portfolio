@@ -4,6 +4,7 @@ import ObservableContainer from './ObservableContainer';
 import Hero from './Hero';
 import Profile from './Profile';
 import { transformIntoSkill } from '../util';
+import ThemeToggle from './Toggle';
 
 const About = lazy(() => import('./About'));
 const Skills = lazy(() => import('./Skills'));
@@ -15,35 +16,47 @@ interface PortfolioProps {
     name: string
     author: string
     description: string
-    links: string
-    repos: string
-    skills: string
-    certs: string
-    aboutMe: string,
+    role: string
+    links: { 
+        github: string
+        codepen?: string
+        leetcode?: string
+    }
+    repos: Array<any>
+    skills: {
+        languages: Array<any>
+        frameworks: Array<any>
+        databases: Array<any>
+        tools: Array<any>
+        platforms: Array<any>
+    }
+    certs: Array<any>
+    aboutMe: Array<string>
     contact: {
         sitekey: string
         endpoint: string
     }
+    enabledAnchors: Array<string>
 }
 
-const Portfolio: FC<PortfolioProps> = ({ name, author, description, links, repos, skills, certs, aboutMe, contact }) => {
-    const externalLinks = JSON.parse(links);
-    const repositories = JSON.parse(repos);
-    const certifications= JSON.parse(certs);
-    const aboutBlocks = JSON.parse(aboutMe);
-    const { languages, frameworks, databases, tools, platforms } = JSON.parse(skills);
+const Portfolio: FC<PortfolioProps> = ({ name, author, description, links, repos, skills, certs, aboutMe, contact, role, enabledAnchors }) => {
+    const { languages = [], frameworks = [], databases = [], tools = [], platforms = [] } = skills;
+
     return (
         <main>
-            <Hero name={name.split(' ')[0]} introduction={description} />
-            <div className='relative flex flex-row w-full'>
-                <Profile name={name} description={description} links={externalLinks} />
-                <ObservableContainer>
+            <Hero name={name.split(' ')[0]} introduction={description} nextAnchor={enabledAnchors[0]} />
+            <div className='relative flex flex-row w-full font-[var(--default-font)]'>
+                <div className='hidden lg:flex fixed w-auto z-3 top-5 left-5'>
+                    <ThemeToggle/>
+                </div>
+                <Profile name={name} role={role} description={description} anchors={enabledAnchors} links={links} />
+		        <ObservableContainer>
                     {
-                        repositories && repositories.length && author && author.length ? <Projects anchor='projects' owner={author} repositories={repositories} /> : null 
+                        enabledAnchors.indexOf('projects') > -1 && author && author.length ? <Projects anchor='projects' owner={author} repositories={repos} /> : null 
                     }
-                    {
-                        languages && languages.length || frameworks && frameworks.length || databases && databases.length || tools && tools.length || platforms && platforms.length ? 
-                            <Skills
+		            {
+			            enabledAnchors.indexOf('skills') > -1 ?  
+			                <Skills
                                 anchor='skills' 
                                 languages={transformIntoSkill(languages)}
                                 frameworks={transformIntoSkill(frameworks)}
@@ -51,14 +64,16 @@ const Portfolio: FC<PortfolioProps> = ({ name, author, description, links, repos
                                 tools={transformIntoSkill(tools)}
                                 platforms={transformIntoSkill(platforms)}
                             /> : null
+		            } 
+                    {
+                        enabledAnchors.indexOf('certifications') > -1 ? <Certifications anchor='certifications' earned={certs} /> : null
                     }
                     {
-                        certifications && certifications.length ? <Certifications anchor='certifications' earned={certifications} /> : null
+			            enabledAnchors.indexOf('about') > -1 ? <About anchor='about' blocks={aboutMe} /> : null
                     }
-                    {
-                        aboutBlocks && aboutBlocks.length ? <About anchor='about' blocks={aboutBlocks} /> : null
-                    }
-                    <Contact anchor='contact' sitekey={contact.sitekey} endpoint={contact.endpoint} />
+		            {
+			            enabledAnchors.indexOf('contact') > -1 ? <Contact anchor='contact' sitekey={contact.sitekey} endpoint={contact.endpoint} /> : null
+		            }
 		        </ObservableContainer>
             </div>
         </main>

@@ -28,9 +28,9 @@ const Button: FC<PropsWithChildren<ButtonProps>> = ({ children, variant, classNa
     className += className.concat(` cursor-${disabled ? 'not-allowed' : 'pointer'} ${disabled ? 'opacity-30' : ''} `);
 
     if (variant === VariantType.Outline) {
-        className = className.concat('py-3 px-5 rounded-lg border border-zinc-600/40');
+        className = className.concat('py-3 px-5 rounded-lg border border-zinc-600/40 dark:border-zinc-200/40');
     } else if (variant === VariantType.Ghost) {
-        className = className.concat('p-6 rounded-lg border border-zinc-100 shadow-sm hover:shadow-md transition-shadow');
+        className = className.concat('p-6 rounded-lg border border-zinc-100 dark:border-zinc-600 shadow-sm hover:shadow-md transition-shadow');
     }
     
     return (<AriaButton type={type} className={className} isDisabled={disabled} onPress={onPress} aria-label={label}>{ children }</AriaButton>);
@@ -40,9 +40,9 @@ const LinkButton: FC<PropsWithChildren<LinkButtonProps>> = ({ children, href, va
     className += className.concat(' ');
 
     if (variant === VariantType.Outline) {
-        className = className.concat('py-3 px-5 rounded-lg border border-zinc-600/30');
+        className = className.concat('py-3 px-5 rounded-lg border border-zinc-600/30 dark:border-zinc-200/40');
     } else if (variant === VariantType.Ghost) {
-        className = className.concat('p-6 rounded-lg border border-zinc-100 shadow-sm hover:shadow-md transition-shadow');
+        className = className.concat('p-6 rounded-lg border border-zinc-100 dark:border-zinc-600 shadow-sm hover:shadow-md transition-shadow');
     }
 
     return (<Link href={href} className={className} onPress={onPress} target={target}>{ children }</Link>);

@@ -7,12 +7,12 @@ import {
 } from 'react';
 import { SectionLoaderSkeleton } from './Skeleton';
 
-interface ProxyProps {
+interface FragmentProps {
     isVisible: boolean,
-    sectionAnchor: string
+    anchor: string
 }
 
-const ProxyStub = forwardRef<HTMLElement, PropsWithChildren<ProxyProps>>(({ children, isVisible, sectionAnchor }, ref) => {
+const Fragment = forwardRef<HTMLElement, PropsWithChildren<FragmentProps>>(({ children, isVisible, anchor }, ref) => {
     const [visibilityEnabled, setVisibilityEnabled] = useState(false);
 
     useEffect(() => {
@@ -22,10 +22,10 @@ const ProxyStub = forwardRef<HTMLElement, PropsWithChildren<ProxyProps>>(({ chil
     }, [isVisible]);
 
     return (
-        <section
-            id={sectionAnchor && sectionAnchor.length ? sectionAnchor : undefined}
+        <div
+            id={anchor && anchor.length ? anchor : undefined}
             ref={ref}
-            className="proxy min-h-screen bg-primary-light px-4 md:px-0 py-16 md:py-24 opacity-0 transition-opacity duration-[1.5s] ease-in-out translate-y-20 will-change-transform"
+            className="proxy min-h-screen bg-[var(--color-custom-light-fg)] dark:bg-zinc-700 px-4 md:px-0 py-16 md:py-24 opacity-0 transition-opacity duration-[1.5s] ease-in-out translate-y-20 will-change-transform"
         >
             {
                 visibilityEnabled ? 
@@ -33,8 +33,8 @@ const ProxyStub = forwardRef<HTMLElement, PropsWithChildren<ProxyProps>>(({ chil
                     { children }
                 </Suspense> : null
             }
-        </section>
+        </div>
     )
 });
 
-export default ProxyStub;
+export default Fragment;

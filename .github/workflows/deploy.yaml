@@ -12,16 +12,11 @@ jobs:
         run: npm ci
       - name: Build
         env:
-          ABOUT_ME: ${{ vars.ABOUT_ME }}
           AUTHOR: ${{ vars.AUTHOR }}
-          DESCRIPTION: ${{ vars.DESCRIPTION }}
-          LINKS: ${{ vars.LINKS }}
-          EARNED_CERTS: ${{ vars.EARNED_CERTS }}
           ENDPOINT: ${{ vars.ENDPOINT }}
           NAME: ${{ vars.NAME }}
-          REPOS: ${{ vars.REPOS }}
           SITEKEY: ${{ vars.SITEKEY }}
-          SKILLS: ${{ vars.SKILLS }}
+          ROLES: ${{ vars.ROLES }}
         run: npm run build
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
