@@ -13,7 +13,7 @@ CAPTCHA_SECRET = os.environ["CAPTCHA_SECRET"]
 EMAIL_VALIDATION_APIKEY = os.environ["EMAIL_VALIDATION_APIKEY"]
 
 VALID_NAME_SEQUENCE = r'^(?!\s*$)(?!^(.)\1+$)[A-Za-z]+(?: [A-Za-z]+)+$'
-VALID_MESSAGE_SEQUENCE = r'^(?!\s*$)(?!^(.)\1+$)( {0,2}[A-Za-z0-9,!$#?@%\.&-()]+(?: [A-Za-z0-9,!$#?@%\.&-()]+)* {0,2})$'
+VALID_MESSAGE_SEQUENCE = r'^(?!\s*$)[\s\S]+$'
 
 def validate_email(email):
     url = f"https://emailvalidation.abstractapi.com/v1/?api_key={EMAIL_VALIDATION_APIKEY}&email={email}"
