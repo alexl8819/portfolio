@@ -45,7 +45,7 @@ const Profile: FC<ProfileProps> = ({ name, role, description, anchors, links }) 
             <h2 className="text-4xl font-playfair-display text-neutral-800 dark:text-white font-bold tracking-tight sm:text-5xl md:text-6xl text-center">
                 { name }
             </h2>
-            <p className='my-4 px-8 2xl:px-36 text-neutral-500 dark:text-neutral-400 text-center'>{ description }</p>
+            <p className='my-4 px-8 2xl:px-28 text-neutral-500 dark:text-neutral-400 text-center'>{ description }</p>
             <Navbar shouldOpen={false} anchors={anchors} />
             <div className='flex flex-row justify-evenly items-center space-x-4'>
                 <h3 className='text-xs uppercase'>Social Media</h3>
